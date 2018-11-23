@@ -1,0 +1,40 @@
+<aura:component implements="force:lightningQuickAction">
+
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'Info', 'value': 'Info'},
+                                                        {'label': 'Disturbing', 'value': 'Disturbing'},
+                                                        {'label': 'Blocking', 'value': 'Blocking'}
+                                                        ]"/>
+    <aura:attribute name="newPC" type="Object"/>
+    <aura:attribute name="simpleNewPC" type="Object"/>
+    <aura:attribute name="newPCError" type="String"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <force:recordData aura:id="PageCommentRecordCreator"
+                      layoutType="FULL"
+                      targetRecord="{!v.newPC}"
+                      targetFields="{!v.simpleNewPC}"
+                      targetError="{!v.newPCError}" />
+    
+    <!-- Display Lightning Data Service errors -->
+    <aura:if isTrue="{!not(empty(v.newPCError))}">
+        <div class="recordError">
+            {!v.newPCError}</div>
+    </aura:if>
+    
+    <lightning:card title="" class="slds-p-around_small">
+        <lightning:textarea name="page" disabled="true" value="{!v.simpleNewPC.Page_URL__c}" label="Page" />
+        <lightning:textarea name="comment" required="true" label="Describe your issue" value="{!v.simpleNewPC.Comment__c}"/>
+        <lightning:radioGroup name="severity"
+                              label="Severity"
+                              options="{!v.options}"
+                              value="{!v.simpleNewPC.Severity__c}"
+                              type="button"
+                              required="true"/>
+        <lightning:textarea name="user" disabled="true" value="{!v.simpleNewPC.User__c}" label="User Id" />
+        <br/>
+        <lightning:button label="Save Comment" variant="brand" onclick="{!c.handleSavePC}"/>
+    </lightning:card>
+
+</aura:component>
