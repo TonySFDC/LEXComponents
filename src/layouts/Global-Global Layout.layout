@@ -10,7 +10,6 @@
     </platformActionList>
     <quickActionList>
         <quickActionListItems>
-            <quickActionName>Comment_on_Page</quickActionName>
         </quickActionListItems>
     </quickActionList>
 </Layout>
