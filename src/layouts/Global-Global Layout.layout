@@ -10,6 +10,7 @@
     </platformActionList>
     <quickActionList>
         <quickActionListItems>
+            <quickActionName>SendEmail</quickActionName>
         </quickActionListItems>
     </quickActionList>
 </Layout>
